@@ -1,0 +1,34 @@
+{
+  "name": "iungo",
+  "version": "0.1.0",
+  "description": "Generate your pages like a champ with Iungo",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aterrae/iungo"
+  },
+  "keywords": [
+    "iungo",
+    "aterrae",
+    "websites",
+    "front-end",
+    "handlebars",
+    "gulp"
+  ],
+  "author": "Aterrae | Digital Growth <info@aterrae.com> (https://aterrae.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aterrae/iungo/issues",
+    "email": "info@aterrae.com"
+  },
+  "homepage": "https://abimis.aterrae.com",
+  "devDependencies": {},
+  "dependencies": {
+    "ansi-html": "^0.0.7",
+    "glob": "^7.1.2",
+    "gulp-util": "^3.0.8",
+    "handlebars": "^4.0.10",
+    "through2": "^2.0.3"
+  }
+}
