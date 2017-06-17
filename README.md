@@ -17,7 +17,7 @@ Javascript functions that, as the name says, help you in your project by providi
 Iungo is a project mainly focused on helping you creating your web pages with reusable and easily maintainable components, avoiding redundancy and headaches.
 
 ## Getting started
-```
+```bash
 yarn add iungo --dev
 or
 npm install iungo --save-dev
@@ -26,7 +26,7 @@ npm install iungo --save-dev
 ## How to use
 Iungo takes as input a stream of HTML pages, injects them with Data, Partials and Helpers and after the compilation it returns your enriched pages.
 
-```
+```js
 import gulp from 'gulp';
 import iungo from 'iungo';
 
@@ -41,7 +41,7 @@ gulp.task('default', function() {
 });
 ```
 To make sure that your compiled files are up to date with your changes, insert your task inside a `gulp.watch` function.
-```
+```js
 gulp.watch('./src/{ pages, data, partials, helpers }', ['default']);
 ```
 
