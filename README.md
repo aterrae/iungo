@@ -1,5 +1,10 @@
 # Iungo - Generate your pages like a champ with Iungo
 
+[![npm version](https://badge.fury.io/js/iungo.svg)](https://badge.fury.io/js/iungo)
+[![Dependency Status](https://david-dm.org/aterrae/iungo.svg)](https://david-dm.org/aterrae/iungo)
+
+![Iungo Logo](logo.png)
+
 Iungo is a simple and intuitive package that simplifies the process of making static web pages.
 It compiles all your pages generating a rich HTML file using:
 - **Data** <br/>
