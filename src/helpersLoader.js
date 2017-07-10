@@ -17,7 +17,7 @@ function helpersLoader(paths) {
 
             Handlebars.registerHelper(basename, require(helperFiles[i]));
         } catch (error) {
-            error.filename = helperFiles[i];
+            error.fileName = helperFiles[i];
             throw new gutil.PluginError('iungo', error);
         }
     }

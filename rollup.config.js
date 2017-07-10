@@ -1,5 +1,6 @@
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
+import string from 'rollup-plugin-string';
 import babel from 'rollup-plugin-babel';
 
 let pkg = require('./package.json');
@@ -9,13 +10,14 @@ let plugins = [
     commonjs({
         include: 'node_modules/**'
     }),
+    string({ include: 'src/*.hbs' }),
     babel({
         exclude: 'node_modules/**'
     })
 ];
 
 export default {
-    entry: './index.js',
+    entry: './src/index.js',
     plugins: plugins,
     external: [
         'ansi-html',

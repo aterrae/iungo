@@ -13,7 +13,7 @@ function dataLoader(data, paths) {
             delete require.cache[require.resolve(dataFiles[i])];
             data[basename] = require(dataFiles[i]);
         } catch (error) {
-            error.filename = dataFiles[i];
+            error.fileName = dataFiles[i];
             throw new gutil.PluginError('iungo', error);
         }
     }
