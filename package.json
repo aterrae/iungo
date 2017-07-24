@@ -2,12 +2,20 @@
   "name": "iungo",
   "version": "0.1.2",
   "description": "Generate your pages like a champ with Iungo",
-  "main": "./dist/iungo.js",
-  "module": "./dist/iungo.mjs",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "prepublish": "rollup -c"
+    "prepublish": "npm run build",
+    "pretest": "npm run build",
+    "test": "jest --notify",
+    "coverage": "jest --coverage"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(hbs)$": "<rootDir>/test/__mocks__/partialMock.js"
+    }
   },
   "repository": {
     "type": "git",
@@ -31,12 +39,14 @@
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-latest": "^6.24.1",
+    "jest": "^20.0.4",
     "rollup": "^0.43.0",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-string": "^2.0.2",
-    "rollup-watch": "^4.0.0"
+    "rollup-watch": "^4.0.0",
+    "vinyl-fs": "^2.4.4"
   },
   "dependencies": {
     "ansi-html": "^0.0.7",

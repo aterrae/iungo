@@ -17,8 +17,12 @@ function helpersLoader(paths) {
 
             Handlebars.registerHelper(basename, require(helperFiles[i]));
         } catch (error) {
-            error.fileName = helperFiles[i];
-            throw new gutil.PluginError('iungo', error);
+            let errorData = {
+                fileName: helperFiles[i],
+                message: "Error in helpers at " + error.loc.line + ":" + error.loc.column,
+                stack: error.codeFrame
+            }
+            throw new gutil.PluginError('iungo', errorData);
         }
     }
 }

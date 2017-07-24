@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`creates data error correctly 1`] = `"Unexpected token } in JSON at position 47"`;
+
+exports[`creates helpers error correctly 1`] = `"Error in helpers at 2:34"`;
+
+exports[`creates partial error correctly 1`] = `"The partial bodi could not be found"`;
+
+exports[`data is being passed correctly 1`] = `
+"<html>
+    <body>
+        <p>Aterrae</p>
+        <p>Rubano</p>
+    </body>
+</html>
+"
+`;
+
+exports[`renders partial correctly 1`] = `
+"<html>
+    <head>
+        <title>Title</title>
+        
+    </head>
+    <body>
+        <p>Body!</p>
+        
+    </body>
+</html>
+"
+`;
+
+exports[`uses helpers correctly 1`] = `
+"<html>
+    <body>
+        <p>I&#x27;m a Iungo helper!</p>
+    </body>
+</html>
+"
+`;

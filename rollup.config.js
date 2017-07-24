@@ -12,7 +12,16 @@ let plugins = [
     }),
     string({ include: 'src/*.hbs' }),
     babel({
-        exclude: 'node_modules/**'
+        babelrc: false,
+        exclude: 'node_modules/**',
+        presets: [
+            ["latest", {
+                "es2015": {
+                    "modules": false
+                }
+            }]
+        ],
+        plugins: ["external-helpers"]
     })
 ];
 
@@ -48,5 +57,6 @@ export default {
             format: 'es',
             sourceMap: true
         }
-    ]
+    ],
+    exports: 'named'
 };

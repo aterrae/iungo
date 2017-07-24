@@ -7,7 +7,7 @@ function filesLoader(paths, pattern) {
     paths = paths instanceof Array ? paths : [paths];
 
     for (let i in paths) {
-        let fullPath = path.join(process.cwd(), paths[i], pattern);
+        let fullPath = path.resolve(process.cwd(), paths[i], pattern);
         files = files.concat(glob.sync(fullPath));
     }
 

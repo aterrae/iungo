@@ -26,8 +26,11 @@ class Iungo {
                     let page = Handlebars.compile(chunk.contents.toString());
                     chunk.contents = new Buffer(page(this.data));
                 } catch (error) {
-                    error.fileName = chunk.history[0];
-                    throw new gutil.PluginError('iungo', error);
+                    let errorData = {
+                        fileName: chunk.history[0],
+                        message: error.message
+                    }
+                    throw new gutil.PluginError('iungo', errorData);
                 }
 
                 stream.push(chunk);
@@ -37,7 +40,7 @@ class Iungo {
                     error: {
                         fileName: error.fileName ? error.fileName : '',
                         message: error.message ? error.message : '',
-                        codeError: error.codeFrame ? ansiHTML(error.codeFrame) : ''
+                        codeError: error.stack ? ansiHTML(error.stack) : ''
                     }
                 }
                 let page = Handlebars.compile(errorPartial);
@@ -56,9 +59,12 @@ class Iungo {
 var iungo;
 
 export default (opt) => {
+    /* istanbul ignore next */
     if (!iungo) {
         iungo = new Iungo(opt);
     }
-
+    /* istanbul ignore next */
     return iungo.render();
 }
+
+export { Iungo };
