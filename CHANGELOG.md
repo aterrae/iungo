@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.1.3 (July 30, 2017)
+
+### Added
+
+- Jest testing
+
 ## v0.1.2 (June 20, 2017)
 
 ### Added
