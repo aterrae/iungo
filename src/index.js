@@ -1,6 +1,6 @@
 import Handlebars from 'handlebars';
+import PluginError from 'plugin-error';
 import through from 'through2';
-import gutil from 'gulp-util';
 import ansiHTML from 'ansi-html';
 import dataLoader from './dataLoader';
 import partialsLoader from './partialsLoader';
@@ -30,7 +30,7 @@ class Iungo {
                         fileName: chunk.history[0],
                         message: error.message
                     }
-                    throw new gutil.PluginError('iungo', errorData);
+                    throw new PluginError('iungo', errorData);
                 }
 
                 stream.push(chunk);

@@ -1,5 +1,5 @@
 import path from 'path';
-import gutil from 'gulp-util';
+import PluginError from 'plugin-error';
 import filesLoader from './filesLoader';
 
 function dataLoader(data, paths) {
@@ -17,7 +17,7 @@ function dataLoader(data, paths) {
                 fileName: dataFiles[i],
                 message: error.message
             }
-            throw new gutil.PluginError('iungo', errorData);
+            throw new PluginError('iungo', errorData);
         }
     }
 }

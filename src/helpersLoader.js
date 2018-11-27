@@ -1,6 +1,6 @@
 import Handlebars from 'handlebars';
+import PluginError from 'plugin-error';
 import path from 'path';
-import gutil from 'gulp-util';
 import filesLoader from './filesLoader';
 
 function helpersLoader(paths) {
@@ -22,7 +22,7 @@ function helpersLoader(paths) {
                 message: "Error in helpers at " + error.loc.line + ":" + error.loc.column,
                 stack: error.codeFrame
             }
-            throw new gutil.PluginError('iungo', errorData);
+            throw new PluginError('iungo', errorData);
         }
     }
 }
