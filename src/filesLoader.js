@@ -1,5 +1,5 @@
-import path from 'path';
-import glob from 'glob';
+import path from "path";
+import glob from "glob";
 
 function filesLoader(paths, pattern) {
     let files = [];

@@ -1,26 +1,26 @@
-import Handlebars from 'handlebars';
-import PluginError from 'plugin-error';
-import through from 'through2';
-import ansiHTML from 'ansi-html';
-import dataLoader from './dataLoader';
-import partialsLoader from './partialsLoader';
-import helpersLoader from './helpersLoader';
-import errorPartial from './error-partial.hbs';
+import Handlebars from "handlebars";
+import PluginError from "plugin-error";
+import through from "through2";
+import ansiHTML from "ansi-html";
+import dataLoader from "./dataLoader";
+import partialsLoader from "./partialsLoader";
+import helpersLoader from "./helpersLoader";
+import errorPartial from "./error-partial.hbs";
 
 class Iungo {
     constructor(opt) {
         this.opt = opt;
         this.data = {};
 
-        ansiHTML.setColors({ reset: ['fff', '002e01'] });
+        ansiHTML.setColors({ reset: ["fff", "002e01"] });
     }
 
     render() {
-        var stream = through.obj((chunk, encoding, callback) => {
+        let stream = through.obj((chunk, encoding, callback) => {
             try {
-                dataLoader(this.data, this.opt.data || '!*');
-                partialsLoader(this.opt.partials || '!*');
-                helpersLoader(this.opt.helpers || '!*');
+                dataLoader(this.data, this.opt.data || "!*");
+                partialsLoader(this.opt.partials || "!*");
+                helpersLoader(this.opt.helpers || "!*");
 
                 try {
                     let page = Handlebars.compile(chunk.contents.toString());
@@ -30,7 +30,7 @@ class Iungo {
                         fileName: chunk.history[0],
                         message: error.message
                     }
-                    throw new PluginError('iungo', errorData);
+                    throw new PluginError("iungo", errorData);
                 }
 
                 stream.push(chunk);
@@ -38,9 +38,9 @@ class Iungo {
             } catch (error) {
                 this.data = {
                     error: {
-                        fileName: error.fileName ? error.fileName : '',
-                        message: error.message ? error.message : '',
-                        codeError: error.stack ? ansiHTML(error.stack) : ''
+                        fileName: error.fileName ? error.fileName : "",
+                        message: error.message ? error.message : "",
+                        codeError: error.stack ? ansiHTML(error.stack) : ""
                     }
                 }
                 let page = Handlebars.compile(errorPartial);
@@ -48,7 +48,7 @@ class Iungo {
 
                 stream.push(chunk);
                 callback(error);
-                stream.emit('end');
+                stream.emit("end");
             }
         });
 
@@ -56,13 +56,11 @@ class Iungo {
     }
 }
 
-var iungo;
+let iungo;
 
 export default (opt) => {
     /* istanbul ignore next */
-    if (!iungo) {
-        iungo = new Iungo(opt);
-    }
+    if (!iungo) { iungo = new Iungo(opt); }
     /* istanbul ignore next */
     return iungo.render();
 }
