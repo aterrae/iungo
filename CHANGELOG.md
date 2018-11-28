@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.1.4 (November 28, 2018)
+
+### Added
+
+- package-lock.json
+
+### Updated
+
+- Migrated Babel and Rollup to newer versions
+- Other dependencies
+- Replaced gulp-util with plugin-error
+- Small improvements
+
 ## v0.1.3 (July 30, 2017)
 
 ### Added

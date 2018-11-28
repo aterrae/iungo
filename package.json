@@ -1,6 +1,6 @@
 {
   "name": "iungo",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Generate your pages like a champ with Iungo",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
