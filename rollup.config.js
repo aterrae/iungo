@@ -15,18 +15,25 @@ let plugins = [
         babelrc: false,
         exclude: 'node_modules/**',
         presets: [
-            ["latest", {
-                "es2015": {
-                    "modules": false
-                }
+            ["@babel/preset-env", {
+              "modules": false
             }]
-        ],
-        plugins: ["external-helpers"]
+        ]
     })
 ];
 
+let globals = {
+    'ansi-html': 'ansiHTML',
+    'glob': 'glob',
+    'plugin-error': 'PluginError',
+    'handlebars': 'Handlebars',
+    'through2': 'through',
+    'fs': 'fs',
+    'path': 'path'
+};
+
 export default {
-    entry: './src/index.js',
+    input: './src/index.js',
     plugins: plugins,
     external: [
         'ansi-html',
@@ -37,26 +44,8 @@ export default {
         'fs',
         'path'
     ],
-    globals: {
-        'ansi-html': 'ansiHTML',
-        'glob': 'glob',
-        'plugin-error': 'PluginError',
-        'handlebars': 'Handlebars',
-        'through2': 'through',
-        'fs': 'fs',
-        'path': 'path'
-    },
-    targets: [
-        {
-            dest: pkg.main,
-            format: 'cjs',
-            sourceMap: true
-        },
-        {
-            dest: pkg.module,
-            format: 'es',
-            sourceMap: true
-        }
-    ],
-    exports: 'named'
+    output: [
+        { file: pkg.main, format: 'cjs', globals: globals, exports: 'named', sourcemap: true },
+        { file: pkg.module, format: 'es', globals: globals, exports: 'named', sourcemap: true }
+    ]
 };
