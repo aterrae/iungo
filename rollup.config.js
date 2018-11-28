@@ -31,7 +31,7 @@ export default {
     external: [
         'ansi-html',
         'glob',
-        'gulp-util',
+        'plugin-error',
         'handlebars',
         'through2',
         'fs',
@@ -40,7 +40,7 @@ export default {
     globals: {
         'ansi-html': 'ansiHTML',
         'glob': 'glob',
-        'gulp-util': 'gutil',
+        'plugin-error': 'PluginError',
         'handlebars': 'Handlebars',
         'through2': 'through',
         'fs': 'fs',
