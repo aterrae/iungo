@@ -1,5 +1,5 @@
 import commonjs from 'rollup-plugin-commonjs';
-import string from 'rollup-plugin-string';
+import { string } from 'rollup-plugin-string';
 import babel from 'rollup-plugin-babel';
 
 let pkg = require('./package.json');
