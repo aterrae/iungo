@@ -24,7 +24,7 @@ class Iungo {
 
         try {
           let page = Handlebars.compile(chunk.contents.toString());
-          chunk.contents = new Buffer(page(this.data));
+          chunk.contents = new Buffer.from(page(this.data));
         } catch (error) {
           let errorData = {
             fileName: chunk.history[0],
@@ -44,7 +44,7 @@ class Iungo {
           },
         };
         let page = Handlebars.compile(errorPartial);
-        chunk.contents = new Buffer(page(this.data));
+        chunk.contents = new Buffer.from(page(this.data));
 
         stream.push(chunk);
         callback(error);
