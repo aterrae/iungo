@@ -7,9 +7,9 @@ import helpersLoader from './utils/helpersLoader';
 import partialsLoader from './utils/partialsLoader';
 import errorPartial from './partials/error-partial.hbs';
 
-class Iungo {
   constructor(opt) {
     this.opt = opt;
+class IungoStream {
     this.data = {};
 
     ansiHTML.setColors({ reset: ['fff', '002e01'] });
@@ -62,7 +62,7 @@ class Iungo {
 
 let iungo;
 
-export default (opt) => {
+const IungoGulpPlugin = (opt) => {
   /* istanbul ignore next */
   if (!iungo) {
     iungo = new Iungo(opt);
@@ -71,4 +71,4 @@ export default (opt) => {
   return iungo.render();
 };
 
-export { Iungo };
+export { IungoStream, IungoGulpPlugin };
