@@ -2,9 +2,9 @@ import Handlebars from 'handlebars';
 import PluginError from 'plugin-error';
 import through from 'through2';
 import ansiHTML from 'ansi-html';
-import dataLoader from './dataLoader';
-import partialsLoader from './partialsLoader';
-import helpersLoader from './helpersLoader';
+import dataLoader from './utils/dataLoader';
+import helpersLoader from './utils/helpersLoader';
+import partialsLoader from './utils/partialsLoader';
 import errorPartial from './partials/error-partial.hbs';
 
 class Iungo {
@@ -18,9 +18,13 @@ class Iungo {
   render() {
     let stream = through.obj((chunk, encoding, callback) => {
       try {
-        dataLoader(this.data, this.opt.data || '!*');
-        partialsLoader(this.opt.partials || '!*');
-        helpersLoader(this.opt.helpers || '!*');
+        try {
+          dataLoader(this.opt.data, this.data);
+          partialsLoader(this.opt.partials);
+          helpersLoader(this.opt.helpers);
+        } catch (error) {
+          throw new PluginError('iungo', error);
+        }
 
         try {
           let page = Handlebars.compile(chunk.contents.toString());
