@@ -8,7 +8,7 @@ let plugins = [
   commonjs({
     include: 'node_modules/**',
   }),
-  string({ include: 'src/*.hbs' }),
+  string({ include: 'src/partials/*.hbs' }),
   babel({
     babelrc: false,
     exclude: 'node_modules/**',

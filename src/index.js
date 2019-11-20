@@ -5,7 +5,7 @@ import ansiHTML from 'ansi-html';
 import dataLoader from './dataLoader';
 import partialsLoader from './partialsLoader';
 import helpersLoader from './helpersLoader';
-import errorPartial from './error-partial.hbs';
+import errorPartial from './partials/error-partial.hbs';
 
 class Iungo {
   constructor(opt) {
