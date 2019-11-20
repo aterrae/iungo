@@ -10,6 +10,7 @@
     "prepare": "npm run build",
     "pretest": "npm run build",
     "test:gulp": "jest test/gulp.test.js --notify",
+    "test:webpack": "jest test/webpack.test.js --notify",
     "coverage": "jest --coverage"
   },
   "jest": {
@@ -39,6 +40,7 @@
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "@babel/preset-env": "^7.7.1",
+    "html-webpack-plugin": "^4.0.0-beta.11",
     "jest": "^24.9.0",
     "prettier": "^1.19.1",
     "rollup": "^1.27.0",
@@ -46,7 +48,8 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-string": "^3.0.0",
-    "vinyl-fs": "^3.0.3"
+    "vinyl-fs": "^3.0.3",
+    "webpack": "^4.41.2"
   },
   "dependencies": {
     "ansi-html": "^0.0.7",
