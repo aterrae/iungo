@@ -1,7 +1,7 @@
 import Handlebars from 'handlebars';
-import { getBasenameWithoutExt, resolveGlob, readFile } from './tools';
+import { getBasenameWithoutExt, resolveGlob, readFile, registerDependency } from './tools';
 
-function partialsLoader(partials) {
+function partialsLoader(partials, fileDependencies, hook) {
   let loadedPartials = [];
 
   if (!partials) {
@@ -19,11 +19,19 @@ function partialsLoader(partials) {
     });
   });
 
+  if (hook) {
+    hook(Handlebars, loadedPartials);
+  }
+
   loadedPartials.forEach((partial) => {
     if (Handlebars.partials[partial.id]) {
       Handlebars.unregisterPartial(partial.id);
     }
     Handlebars.registerPartial(partial.id, partial.content);
+
+    if (fileDependencies) {
+      registerDependency(partial.filepath, fileDependencies);
+    }
   });
 }
 

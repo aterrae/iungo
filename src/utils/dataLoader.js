@@ -1,6 +1,6 @@
-import { getBasenameWithoutExt, resolveGlob } from './tools';
+import { getBasenameWithoutExt, resolveGlob, registerDependency } from './tools';
 
-function dataLoader(data, dataLoaded) {
+function dataLoader(data, dataLoaded, fileDependencies) {
   if (!data) {
     return;
   }
@@ -12,6 +12,10 @@ function dataLoader(data, dataLoaded) {
         try {
           delete require.cache[require.resolve(dataPath)];
           dataLoaded[getBasenameWithoutExt(dataPath)] = require(dataPath);
+
+          if (fileDependencies) {
+            registerDependency(dataPath, fileDependencies);
+          }
         } catch (error) {
           throw new Error(`${dataPath}: ${error.message}`);
         }

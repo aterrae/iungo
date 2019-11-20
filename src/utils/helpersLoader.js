@@ -1,7 +1,7 @@
 import Handlebars from 'handlebars';
-import { getBasenameWithoutExt, resolveGlob } from './tools';
+import { getBasenameWithoutExt, resolveGlob, registerDependency } from './tools';
 
-function helpersLoader(helpers) {
+function helpersLoader(helpers, fileDependencies, hook) {
   const loadedHelpers = [];
 
   if (!helpers) {
@@ -32,11 +32,19 @@ function helpersLoader(helpers) {
     }
   });
 
+  if (hook) {
+    hook(Handlebars, loadedHelpers);
+  }
+
   loadedHelpers.forEach((helper) => {
     if (Handlebars.helpers[helper.id]) {
       Handlebars.unregisterHelper(helper.id);
     }
     Handlebars.registerHelper(helper.id, helper.function);
+
+    if ((helper.filepath !== '') && fileDependencies) {
+      registerDependency(helper.filepath, fileDependencies);
+    }
   });
 }
 
