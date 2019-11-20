@@ -7,9 +7,17 @@ import helpersLoader from './utils/helpersLoader';
 import partialsLoader from './utils/partialsLoader';
 import errorPartial from './partials/error-partial.hbs';
 
-  constructor(opt) {
-    this.opt = opt;
 class IungoStream {
+  constructor(options = {}) {
+    this.options = Object.assign(
+      {
+        data: [],
+        helpers: {},
+        partials: [],
+      },
+      options,
+    );
+
     this.data = {};
 
     ansiHTML.setColors({ reset: ['fff', '002e01'] });
@@ -19,9 +27,9 @@ class IungoStream {
     let stream = through.obj((chunk, encoding, callback) => {
       try {
         try {
-          dataLoader(this.opt.data, this.data);
-          partialsLoader(this.opt.partials);
-          helpersLoader(this.opt.helpers);
+          dataLoader(this.options.data, this.data);
+          partialsLoader(this.options.partials);
+          helpersLoader(this.options.helpers);
         } catch (error) {
           throw new PluginError('iungo', error);
         }
@@ -62,10 +70,10 @@ class IungoStream {
 
 let iungo;
 
-const IungoGulpPlugin = (opt) => {
+const IungoGulpPlugin = (options) => {
   /* istanbul ignore next */
   if (!iungo) {
-    iungo = new Iungo(opt);
+    iungo = new Iungo(options);
   }
   /* istanbul ignore next */
   return iungo.render();
