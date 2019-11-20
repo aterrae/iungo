@@ -1,15 +1,15 @@
 import path from 'path';
 import fs from 'fs';
 import vfs from 'vinyl-fs';
-import { Iungo } from '../src';
+import { IungoStream } from '../src';
 
 const FIXTURES = path.join(__dirname, 'fixtures/');
 
 test('renders partial correctly', (done) => {
   expect.assertions(1);
 
-  let i = new Iungo({
-    partials: FIXTURES + 'partial/partials',
+  let i = new IungoStream({
+    partials: [FIXTURES + 'partial/partials'],
   });
 
   vfs
@@ -26,8 +26,8 @@ test('renders partial correctly', (done) => {
 test('creates partial error correctly', (done) => {
   expect.assertions(1);
 
-  let i = new Iungo({
-    partials: FIXTURES + 'partial-error/partials',
+  let i = new IungoStream({
+    partials: [FIXTURES + 'partial-error/partials'],
   });
 
   vfs
@@ -42,8 +42,14 @@ test('creates partial error correctly', (done) => {
 test('data is being passed correctly', (done) => {
   expect.assertions(2);
 
-  let i = new Iungo({
-    data: FIXTURES + 'data/data',
+  let i = new IungoStream({
+    data: [
+      FIXTURES + 'data/data',
+      {
+        title: 'Iungo',
+        subtitle: 'Testing',
+      },
+    ],
   });
 
   vfs
@@ -56,6 +62,8 @@ test('data is being passed correctly', (done) => {
           name: 'Aterrae',
           location: 'Rubano',
         },
+        title: 'Iungo',
+        subtitle: 'Testing',
       });
       let build = fs.readFileSync(FIXTURES + 'data/build/index.html').toString();
       expect(build).toMatchSnapshot();
@@ -66,15 +74,22 @@ test('data is being passed correctly', (done) => {
 test('creates data error correctly', (done) => {
   expect.assertions(1);
 
-  let i = new Iungo({
-    data: FIXTURES + 'data-error/data',
+  let i = new IungoStream({
+    data: [
+      FIXTURES + 'data-error/data',
+      {
+        title: 'Iungo',
+        subtitle: 'Testing',
+      },
+    ],
   });
 
   vfs
     .src(FIXTURES + 'data-error/pages/index.html')
     .pipe(i.render())
     .on('error', (error) => {
-      expect(error.message).toMatchSnapshot();
+      const errorWithoutPath = error.message.split(': ')[1];
+      expect(errorWithoutPath).toMatchSnapshot();
       done();
     });
 });
@@ -82,8 +97,13 @@ test('creates data error correctly', (done) => {
 test('uses helpers correctly', (done) => {
   expect.assertions(1);
 
-  let i = new Iungo({
-    helpers: FIXTURES + 'helper/helpers',
+  let i = new IungoStream({
+    helpers: {
+      projectHelpers: FIXTURES + 'helper/helpers',
+      testHelpers: () => {
+        return 'test';
+      },
+    },
   });
 
   vfs
@@ -100,15 +120,21 @@ test('uses helpers correctly', (done) => {
 test('creates helpers error correctly', (done) => {
   expect.assertions(1);
 
-  let i = new Iungo({
-    helpers: FIXTURES + 'helper-error/helpers',
+  let i = new IungoStream({
+    helpers: {
+      projectHelpers: FIXTURES + 'helper-error/helpers',
+      testHelpers: () => {
+        return 'test';
+      },
+    },
   });
 
   vfs
     .src(FIXTURES + 'helper-error/pages/index.html')
     .pipe(i.render())
     .on('error', (error) => {
-      expect(error.message).toMatchSnapshot();
+      const errorWithoutPath = error.message.split(': ')[1];
+      expect(errorWithoutPath).toMatchSnapshot();
       done();
     });
 });
