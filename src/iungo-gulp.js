@@ -73,7 +73,7 @@ let iungo;
 const IungoGulpPlugin = (options) => {
   /* istanbul ignore next */
   if (!iungo) {
-    iungo = new Iungo(options);
+    iungo = new IungoStream(options);
   }
   /* istanbul ignore next */
   return iungo.render();
