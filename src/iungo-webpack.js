@@ -140,7 +140,7 @@ class IungoWebpackPlugin {
       compiler.hooks.compilation.tap('IungoWebpackPlugin', (compilation) => {
         this.options.htmlWebpackPlugin
           .getHooks(compilation)
-          .beforeEmit.tapAsync('IungoWebpackPlugin', (data, callback) => {
+          .afterTemplateExecution.tapAsync('IungoWebpackPlugin', (data, callback) => {
             compileWithHtmlPlugin(
               compilation,
               () => {
