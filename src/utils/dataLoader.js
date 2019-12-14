@@ -1,4 +1,5 @@
 import { getBasenameWithoutExt, resolveGlob, registerDependency } from './tools';
+import IungoError from './iungoError';
 
 function dataLoader(data, dataLoaded, fileDependencies) {
   if (!data) {
@@ -17,7 +18,7 @@ function dataLoader(data, dataLoaded, fileDependencies) {
             registerDependency(dataPath, fileDependencies);
           }
         } catch (error) {
-          throw new Error(`${dataPath}: ${error.message}`);
+          throw new IungoError(error.message, dataPath, error.stack);
         }
       });
     } else {

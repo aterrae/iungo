@@ -1,10 +1,10 @@
 import Handlebars from 'handlebars';
-import PluginError from 'plugin-error';
 import through from 'through2';
 import ansiHTML from 'ansi-html';
 import dataLoader from './utils/dataLoader';
 import helpersLoader from './utils/helpersLoader';
 import partialsLoader from './utils/partialsLoader';
+import IungoError from './utils/iungoError';
 import errorPartial from './partials/error-partial.hbs';
 
 class IungoStream {
@@ -26,23 +26,15 @@ class IungoStream {
   render() {
     let stream = through.obj((chunk, encoding, callback) => {
       try {
-        try {
-          dataLoader(this.options.data, this.data);
-          partialsLoader(this.options.partials);
-          helpersLoader(this.options.helpers);
-        } catch (error) {
-          throw new PluginError('iungo', error);
-        }
+        dataLoader(this.options.data, this.data);
+        partialsLoader(this.options.partials);
+        helpersLoader(this.options.helpers);
 
         try {
           let page = Handlebars.compile(chunk.contents.toString());
           chunk.contents = new Buffer.from(page(this.data));
         } catch (error) {
-          let errorData = {
-            fileName: chunk.history[0],
-            message: error.message,
-          };
-          throw new PluginError('iungo', errorData);
+          throw new IungoError(error.message, chunk.history[0], error.stack);
         }
 
         stream.push(chunk);

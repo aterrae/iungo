@@ -11,11 +11,15 @@ function partialsLoader(partials, fileDependencies, hook) {
   partials.forEach((partial) => {
     const partialsPaths = resolveGlob(`${partial}/**/*.{html,hbs,handlebars}`);
     partialsPaths.forEach((partialPath) => {
-      loadedPartials.push({
-        id: getBasenameWithoutExt(partialPath),
-        filepath: partialPath,
-        content: readFile(partialPath),
-      });
+      try {
+        loadedPartials.push({
+          id: getBasenameWithoutExt(partialPath),
+          filepath: partialPath,
+          content: readFile(partialPath),
+        });
+      } catch (error) {
+        throw new IungoError(error.message, partialPath, error.stack);
+      }
     });
   });
 

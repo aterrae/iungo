@@ -11,6 +11,7 @@ import {
   registerDependency,
   getBasenameWithoutExt,
 } from './utils/tools';
+import IungoError from './utils/iungoError';
 
 class IungoWebpackPlugin {
   constructor(options = {}) {
@@ -87,7 +88,7 @@ class IungoWebpackPlugin {
         });
         callback();
       } catch (error) {
-        compilation.errors.push(new Error(`IungoWebpackPlugin: ${error.message}`));
+        compilation.errors.push(error);
         callback();
       }
     };
@@ -113,7 +114,7 @@ class IungoWebpackPlugin {
         this.compileFile(path, content, compilation);
         callback();
       } catch (error) {
-        compilation.errors.push(new Error(`IungoWebpackPlugin: ${error.message}`));
+        compilation.errors.push(error);
         callback();
       }
     };
@@ -130,7 +131,7 @@ class IungoWebpackPlugin {
         callback();
       } catch (error) {
         compilation.errors.push(
-          new Error('IungoWebpackPlugin: there was an error registering dependencies'),
+          new IungoError(`There was an error registering dependencies`),
         );
         callback();
       }
@@ -204,9 +205,7 @@ class IungoWebpackPlugin {
         };
       } else {
         compilation.errors.push(
-          new Error(
-            "IungoWebpackPlugin: you can't set the output filepath outside the webpack dest folder",
-          ),
+          new IungoError(`You can't set the output filepath outside the webpack dest folder`),
         );
       }
     }

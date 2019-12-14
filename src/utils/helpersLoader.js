@@ -1,5 +1,6 @@
 import Handlebars from 'handlebars';
 import { getBasenameWithoutExt, resolveGlob, registerDependency } from './tools';
+import IungoError from './iungoError';
 
 function helpersLoader(helpers, fileDependencies, hook) {
   const loadedHelpers = [];
@@ -22,7 +23,7 @@ function helpersLoader(helpers, fileDependencies, hook) {
             function: require(helperPath),
           });
         } catch (error) {
-          throw new Error(error.message);
+          throw new IungoError(error.message, helperPath, error.stack);
         }
       });
     } else {
