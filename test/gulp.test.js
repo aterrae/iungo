@@ -46,8 +46,7 @@ test('data is being passed correctly', (done) => {
     data: [
       FIXTURES + 'data/data',
       {
-        title: 'Iungo',
-        subtitle: 'Testing',
+        name: 'Iungo',
       },
     ],
   });
@@ -59,11 +58,10 @@ test('data is being passed correctly', (done) => {
     .on('finish', () => {
       expect(i.data).toEqual({
         strings: {
-          name: 'Aterrae',
-          location: 'Rubano',
+          title: 'Aterrae',
+          location: 'Sarmeola di Rubano (PD), Italy',
         },
-        title: 'Iungo',
-        subtitle: 'Testing',
+        name: 'Iungo',
       });
       let build = fs.readFileSync(FIXTURES + 'data/build/index.html').toString();
       expect(build).toMatchSnapshot();
