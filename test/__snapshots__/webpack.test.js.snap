@@ -1,74 +1,79 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`creates custom output path error correctly 1`] = `"IungoWebpackPlugin: you can't set the output filepath outside the webpack dest folder"`;
+exports[`creates custom output path error correctly 1`] = `"You can't set the output filepath outside the webpack dest folder"`;
 
-exports[`creates data error correctly 1`] = `"Unexpected token } in JSON at position 47"`;
+exports[`creates data error correctly 1`] = `"Unexpected token } in JSON at position 72"`;
 
 exports[`creates helpers error correctly 1`] = `
-"Unexpected token (2:34)
+"Unexpected token (2:42)
 
 [0m [90m 1 | [39mmodule[33m.[39mexports [33m=[39m [36mfunction[39m () {[0m
-[0m[31m[1m>[22m[39m[90m 2 | [39m    [36mreturn[39m [32m'I\\\\'m a Iungo helper!'[39m[33m;[39m[33m...[39m[0m
-[0m [90m   | [39m                                  [31m[1m^[22m[39m[0m
+[0m[31m[1m>[22m[39m[90m 2 | [39m  [36mreturn[39m [32m'Sarmeola di Rubano (PD), Italy'[39m[33m;[39m[33m...[39m[0m
+[0m [90m   | [39m                                          [31m[1m^[22m[39m[0m
 [0m [90m 3 | [39m}[0m
 [0m [90m 4 | [39m[0m"
 `;
 
-exports[`creates partial error correctly 1`] = `"IungoWebpackPlugin: The partial bodi could not be found"`;
+exports[`creates partial error correctly 1`] = `"The partial paragrap could not be found"`;
 
-exports[`creates partial error with HtmlWebpackPlugin correctly 1`] = `"IungoWebpackPlugin: The partial bodi could not be found"`;
+exports[`creates partial error with HtmlWebpackPlugin correctly 1`] = `"The partial paragrap could not be found"`;
 
 exports[`data is being passed correctly 1`] = `
 "<html>
-    <body>
-        <p>Aterrae</p>
-        <p>Rubano</p>
-    </body>
+  <head>
+    <title>Aterrae</title>
+  </head>
+  <body>
+    <p>Sarmeola di Rubano (PD), Italy</p>
+  </body>
 </html>
 "
 `;
 
 exports[`renders partial correctly 1`] = `
 "<html>
-    <head>
-        <title>Title</title>
-    </head>
-    <body>
-        <p>Body!</p>
-    </body>
+  <head>
+    <title>Aterrae</title>
+  </head>
+  <body>
+    <p>Sarmeola di Rubano (PD), Italy</p>
+  </body>
 </html>
 "
 `;
 
 exports[`renders partial with HtmlWebpackPlugin correctly 1`] = `
 "<html>
-    <head>
-        <title>Title</title>
-    </head>
-    <body>
-        <p>Body!</p>
-    <script src=\\"bundle.js\\"></script></body>
+  <head>
+    <title>Aterrae</title>
+  </head>
+  <body>
+    <p>Sarmeola di Rubano (PD), Italy</p>
+  <script src=\\"bundle.js\\"></script></body>
 </html>
 "
 `;
 
 exports[`renders using custom output path correctly 1`] = `
 "<html>
-    <head>
-        <title>Iungo</title>
-    </head>
-    <body>
-        <p>Testing</p>
-    </body>
+  <head>
+    <title>Aterrae</title>
+  </head>
+  <body>
+    <p>Sarmeola di Rubano (PD), Italy</p>
+  </body>
 </html>
 "
 `;
 
 exports[`uses helpers correctly 1`] = `
 "<html>
-    <body>
-        <p>I&#x27;m a Iungo helper!</p>
-    </body>
+  <head>
+    <title>Aterrae</title>
+  </head>
+  <body>
+    <p>Sarmeola di Rubano (PD), Italy</p>
+  </body>
 </html>
 "
 `;

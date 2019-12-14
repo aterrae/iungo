@@ -86,8 +86,7 @@ test('creates data error correctly', (done) => {
     .src(FIXTURES + 'data-error/pages/index.html')
     .pipe(i.render())
     .on('error', (error) => {
-      const errorWithoutPath = error.message.split(': ')[1];
-      expect(errorWithoutPath).toMatchSnapshot();
+      expect(error.message).toMatchSnapshot();
       done();
     });
 });

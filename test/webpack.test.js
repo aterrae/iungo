@@ -235,8 +235,7 @@ test('creates data error correctly', (done) => {
       if (err || stats.hasErrors()) {
         const jsonStats = stats.toJson('normal');
         const error = jsonStats.errors[0];
-        const errorWithoutPath = error.split(': ')[2];
-        expect(errorWithoutPath).toMatchSnapshot();
+        expect(error).toMatchSnapshot();
         done();
       }
     },
@@ -298,7 +297,7 @@ test('creates helpers error correctly', (done) => {
       if (err || stats.hasErrors()) {
         const jsonStats = stats.toJson('normal');
         const error = jsonStats.errors[0];
-        const errorWithoutPath = error.split(': ')[2];
+        const errorWithoutPath = error.split(': ')[1];
         expect(errorWithoutPath).toMatchSnapshot();
         done();
       }
