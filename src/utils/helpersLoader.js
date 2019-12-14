@@ -9,7 +9,9 @@ function helpersLoader(helpers, fileDependencies, hook) {
   }
 
   Object.keys(helpers).forEach((helperKey) => {
-    if (typeof helpers[helperKey] === 'string') {
+    if (typeof helpers[helperKey] === 'string' || Array.isArray(helpers[helperKey])) {
+      helpers[helperKey] = Array.isArray(helpers[helperKey]) ? helpers[helperKey] : [helpers[helperKey]];
+
       const helpersPaths = resolveGlob(`${helpers[helperKey]}/**/*.js`);
       helpersPaths.forEach((helperPath) => {
         try {
