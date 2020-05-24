@@ -42,6 +42,7 @@ class IungoWebpackPlugin {
     this.fileDependencies = [];
     this.assetsGenerated = {};
     this.prevTimestamp = {};
+    this.prevTemplate = null;
     this.startTime = Date.now();
   }
 
@@ -94,8 +95,11 @@ class IungoWebpackPlugin {
     };
 
     const compileWithHtmlPlugin = (compilation, callback, data) => {
+      let self = this;
+
       try {
         if (!this.dependenciesUpdated(compilation)) {
+          data.html = this.prevTemplate;
           callback();
           return;
         }
@@ -108,6 +112,7 @@ class IungoWebpackPlugin {
         let content = data.html;
 
         this.options.onBeforeSave = function(hb, hbTemplate) {
+          self.prevTemplate = hbTemplate;
           data.html = hbTemplate;
         };
 
