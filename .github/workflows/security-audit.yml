@@ -2,7 +2,7 @@ name: Security Audit
 
 on:
   push:
-    branches: [main, feat/**, fix/**]
+    branches: [main]
   pull_request:
     branches: [main]
 
@@ -21,8 +21,6 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10.20.0
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
