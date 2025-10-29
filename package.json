@@ -38,18 +38,19 @@
   },
   "homepage": "https://abimis.aterrae.com",
   "devDependencies": {
-    "@babel/core": "^7.7.2",
-    "@babel/preset-env": "^7.7.1",
-    "html-webpack-plugin": "^4.0.0-beta.11",
-    "jest": "^24.9.0",
-    "prettier": "^1.19.1",
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "html-webpack-plugin": "^4.5.2",
+    "jest": "^30.2.0",
+    "node-notifier": "^10.0.1",
+    "prettier": "^3.6.2",
     "rollup": "^1.27.0",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-string": "^3.0.0",
-    "vinyl-fs": "^3.0.3",
-    "webpack": "^4.41.2"
+    "vinyl-fs": "^4.0.2",
+    "webpack": "^4.47.0"
   },
   "dependencies": {
     "ansi-html": "^0.0.7",
