@@ -5,13 +5,25 @@
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "prepare": "npm run build",
-    "pretest": "npm run build",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "prepare": "pnpm run build",
+    "pretest": "pnpm run build",
     "test": "jest test/webpack.test.js --notify",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "typecheck": "tsc --noEmit"
   },
   "jest": {
     "moduleNameMapper": {
@@ -27,7 +39,8 @@
     "aterrae",
     "websites",
     "front-end",
-    "handlebars"
+    "handlebars",
+    "typescript"
   ],
   "author": "Aterrae | Digital Growth <info@aterrae.com> (https://aterrae.com)",
   "license": "MIT",
@@ -37,20 +50,15 @@
   },
   "homepage": "https://abimis.aterrae.com",
   "devDependencies": {
-    "@babel/core": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
+    "@types/node": "^24.9.2",
+    "esbuild": "^0.25.11",
     "jest": "^30.2.0",
-    "node-notifier": "^10.0.1",
     "prettier": "^3.6.2",
-    "rollup": "^1.27.0",
-    "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-string": "^3.0.0"
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
-    "ansi-html": "^0.0.9",
-    "glob": "^9.3.5",
+    "glob": "^11.0.3",
     "handlebars": "^4.7.8"
   },
   "packageManager": "pnpm@10.20.0+sha512.cf9998222162dd85864d0a8102e7892e7ba4ceadebbf5a31f9c2fce48dfce317a9c53b9f6464d1ef9042cba2e02ae02a9f7c143a2b438cd93c91840f0192b9dd"
