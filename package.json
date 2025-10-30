@@ -21,14 +21,10 @@
     "dev": "tsup --watch",
     "prepare": "pnpm run build",
     "pretest": "pnpm run build",
-    "test": "jest test/webpack.test.js --notify",
-    "coverage": "jest --coverage",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "coverage": "vitest --coverage",
     "typecheck": "tsc --noEmit"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(hbs)$": "<rootDir>/test/__mocks__/partialMock.js"
-    }
   },
   "repository": {
     "type": "git",
@@ -52,10 +48,10 @@
   "devDependencies": {
     "@types/node": "^24.9.2",
     "esbuild": "^0.25.11",
-    "jest": "^30.2.0",
     "prettier": "^3.6.2",
     "tsup": "^8.5.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.5"
   },
   "dependencies": {
     "glob": "^11.0.3",
