@@ -2,6 +2,7 @@
   "name": "iungo",
   "version": "0.1.4",
   "description": "Generate your pages like a champ with Iungo",
+  "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "scripts": {
