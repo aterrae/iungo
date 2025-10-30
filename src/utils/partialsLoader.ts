@@ -1,8 +1,21 @@
 import Handlebars from 'handlebars';
-import { getBasenameWithoutExt, resolveGlob, readFile, registerDependency } from './tools';
+import { getBasenameWithoutExt, resolveGlob, readFile, registerDependency } from './tools.js';
+import IungoError from './iungoError.js';
 
-function partialsLoader(partials, fileDependencies, hook) {
-  let loadedPartials = [];
+interface LoadedPartial {
+  id: string;
+  filepath: string;
+  content: string;
+}
+
+type PartialsLoaderHook = (handlebars: typeof Handlebars, partials: LoadedPartial[]) => void;
+
+function partialsLoader(
+  partials: string[],
+  fileDependencies?: string[],
+  hook?: PartialsLoaderHook
+): void {
+  const loadedPartials: LoadedPartial[] = [];
 
   if (!partials) {
     return;
@@ -17,7 +30,7 @@ function partialsLoader(partials, fileDependencies, hook) {
           filepath: partialPath,
           content: readFile(partialPath),
         });
-      } catch (error) {
+      } catch (error: any) {
         throw new IungoError(error.message, partialPath, error.stack);
       }
     });

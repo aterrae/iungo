@@ -1,47 +1,37 @@
 import path from 'path';
-import glob from 'glob';
+import { globSync } from 'glob';
 import fs from 'fs';
 
-function getAbsolutePath(entryPath) {
+export function getAbsolutePath(entryPath: string | null): string | null {
   if (!entryPath) {
     return null;
   }
   return path.resolve(process.cwd(), entryPath);
 }
 
-function getBasename(entryPath) {
+export function getBasename(entryPath: string): string {
   return path.basename(entryPath);
 }
 
-function getBasenameWithoutExt(entryPath) {
+export function getBasenameWithoutExt(entryPath: string): string {
   return path.basename(entryPath, path.extname(entryPath));
 }
 
-function getPathDiff(entryPath1, entryPath2) {
+export function getPathDiff(entryPath1: string, entryPath2: string): string {
   return entryPath1.replace(entryPath2, '').replace(/^\/*/, '');
 }
 
-function resolveGlob(entryPath) {
+export function resolveGlob(entryPath: string): string[] {
   const pattern = path.resolve(process.cwd(), entryPath);
-  return glob.sync(pattern);
+  return globSync(pattern);
 }
 
-function readFile(entryPath) {
+export function readFile(entryPath: string): string {
   return fs.readFileSync(entryPath, 'utf8');
 }
 
-function registerDependency(entryPath, dependencies) {
+export function registerDependency(entryPath: string, dependencies: string[]): void {
   if (entryPath && entryPath !== '' && dependencies && !dependencies.includes(entryPath)) {
     dependencies.push(entryPath);
   }
 }
-
-export {
-  getAbsolutePath,
-  getBasename,
-  getBasenameWithoutExt,
-  getPathDiff,
-  resolveGlob,
-  readFile,
-  registerDependency,
-};

@@ -1,7 +1,16 @@
-import { getBasenameWithoutExt, resolveGlob, registerDependency } from './tools';
-import IungoError from './iungoError';
+import { getBasenameWithoutExt, resolveGlob, registerDependency } from './tools.js';
+import IungoError from './iungoError.js';
+import { createRequire } from 'module';
 
-function dataLoader(data, dataLoaded, fileDependencies) {
+const require = createRequire(import.meta.url);
+
+type DataSource = string | Record<string, any>;
+
+function dataLoader(
+  data: DataSource[],
+  dataLoaded: Record<string, any>,
+  fileDependencies?: string[]
+): void {
   if (!data) {
     return;
   }
@@ -17,12 +26,12 @@ function dataLoader(data, dataLoaded, fileDependencies) {
           if (fileDependencies) {
             registerDependency(dataPath, fileDependencies);
           }
-        } catch (error) {
+        } catch (error: any) {
           throw new IungoError(error.message, dataPath, error.stack);
         }
       });
     } else {
-      dataLoaded = Object.assign(dataLoaded, dataItem);
+      Object.assign(dataLoaded, dataItem);
     }
   });
 }
