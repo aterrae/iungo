@@ -18,47 +18,11 @@ e.g.: You can create a `navbar.hbs` file to contain your navbar's code and inclu
 
 ## Install
 ```bash
-yarn add iungo --dev
+pnpm add iungo --save-dev
 ```
 or
 ```bash
 npm install iungo --save-dev
-```
-
-## Using Iungo with Gulp
-```js
-import gulp from 'gulp';
-import { IungoGulpPlugin } from 'iungo';
-
-gulp.task('default', () => {
-  // Iungo takes as input a stream of HTML pages.
-  gulp.src('src/pages/**/*.html')
-    .pipe(IungoGulpPlugin({
-      // Data passed to your pages.
-      data: [
-        'src/data',
-        {
-          title: 'Iungo',
-          subtitle: 'Generate your files',
-        },
-      ],
-      // Custom helpers registered.
-      helpers: {
-        projectHelpers: 'src/helpers',
-        helloWorld: () => { return 'Hello World'; },
-      },
-      // Custom partials registered.
-      partials: [
-        'src/partials',
-      ],
-    }))
-    // Iungo returns your compiled pages.
-    .pipe(gulp.dest('dist'));
-});
-```
-To compile all your pages every time your code changes, you've to insert your task inside a `gulp.watch` function.
-```js
-gulp.watch('./src/{ pages, data, partials, helpers }', ['default']);
 ```
 
 ## Using Iungo with Webpack
@@ -144,8 +108,7 @@ const webpackConfig = {
 };
 ```
 
-## Common Options
-Here are some options that are in common between the Gulp and Webpack plugin:
+## Plugin Options
 
 Name|Type|Description
 ---|---|---
